@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080d19">
+    <meta name="description" content="XPENDYZ Studio - Ambiente moderno de programação para computadores e celulares.">
+
+    <title>XPENDYZ — Code Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">X</div>
+            <span>XPENDYZ</span>
+            <span class="version">STUDIO</span>
+        </div>
+
+        <div class="header-status">
+            <span class="status-dot"></span>
+            Workspace Ready
+        </div>
+
+        <button class="menu-button" id="menuButton" aria-label="Open menu">
+            ☰
+        </button>
+
+    </header>
+
+    <main class="workspace">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-heading">WORKSPACE</div>
+
+            <button class="sidebar-item active" data-section="editor">
+                <span>⌘</span> Editor
+            </button>
+
+            <button class="sidebar-item" data-section="projects">
+                <span>▣</span> Projects
+            </button>
+
+            <button class="sidebar-item" data-section="settings">
+                <span>⚙</span> Settings
+            </button>
+
+            <div class="sidebar-bottom">
+                <div class="profile-avatar">X</div>
+                <div>
+                    <strong>Developer</strong>
+                    <small>Personal Workspace</small>
+                </div>
+            </div>
+
+        </aside>
+
+        <section class="main-content"><div class="welcome-section">
+
+                <div>
+                    <span class="eyebrow">DEVELOPMENT ENVIRONMENT</span>
+                    <h1>Welcome to <span>XPENDYZ.</span></h1>
+                    <p>Your ideas. Your code. Your workspace.</p>
+                </div>
+
+                <div class="workspace-badge">
+                    <span class="status-dot"></span>
+                    Online
+                </div>
+
+            </div>
+
+            <section class="editor-panel">
+
+                <div class="editor-toolbar">
+
+                    <div class="file-tab">
+                        <span class="file-icon">&lt;/&gt;</span>
+                        index.html
+                    </div>
+
+                    <div class="editor-actions">
+                        <button id="clearButton">Clear</button>
+                        <button id="runButton" class="run-button">
+                            ▶ Run Code
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="editor-area">
+
+                    <div class="line-numbers" id="lineNumbers">1</div>
+
+                    <textarea
+                        id="codeEditor"
+                        spellcheck="false"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        autocorrect="off"
+                        placeholder="Start writing your code here..."
+                        aria-label="Code editor"
+                    ></textarea>
+
+                </div>
+
+                <div class="editor-footer">
+                    <span>HTML</span>
+                    <span id="characterCount">0 characters</span>
+                </div>
+
+            </section><section class="preview-section">
+
+                <div class="preview-header">
+
+                    <div>
+                        <span class="preview-indicator"></span>
+                        LIVE PREVIEW
+                    </div>
+
+                    <span class="preview-label">OUTPUT</span>
+
+                </div>
+
+                <iframe
+                    id="previewFrame"
+                    title="Code preview"
+                    sandbox="allow-scripts"
+                ></iframe>
+
+            </section>
+
+            <section class="feature-grid">
+
+                <article class="feature-card">
+                    <div class="feature-icon">⌘</div>
+                    <h3>Code Editor</h3>
+                    <p>Write and experiment with your code.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">◈</div>
+                    <h3>Live Preview</h3>
+                    <p>Visualize your work in real time.</p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">✧</div>
+                    <h3>Responsive</h3>
+                    <p>Designed for desktop and mobile devices.</p>
+                </article>
+
+            </section>
+
+            <footer class="footer">
+                <span>XPENDYZ STUDIO © 2026</span>
+                <span>Built for creators and developers.</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+</div><script src="script.js"></script>
+
+</body>
+</html>

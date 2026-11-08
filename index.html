@@ -9,41 +9,189 @@
 </head>
 <body>
     <div class="app-shell">
+        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="brand"><span>⚡</span> XPENDYZ</div>
+            
+            <div class="nav-section-title">WORKSPACE</div>
             <nav class="nav-list">
                 <a href="#" class="nav-link active" onclick="switchTab('workspace')">Workspace</a>
-                <a href="#" class="nav-link" onclick="switchTab('projects')">Projects</a>
+                <a href="#" class="nav-link" onclick="switchTab('projects')">Projetos</a>
                 <a href="#" class="nav-link" onclick="switchTab('assistant')">AI Assistant</a>
-                <a href="#" class="nav-link" onclick="switchTab('editor')">Editor</a>
             </nav>
+
+            <div class="nav-section-title">YOUR ACCOUNT</div>
+            <nav class="nav-list">
+                <a href="#" class="nav-link" onclick="switchTab('plans')">Planos & Preços</a>
+                <a href="#" class="nav-link" onclick="switchTab('account')">Minha Conta</a>
+                <a href="#" class="nav-link" onclick="switchTab('editor')">Editor</a>
+                <a href="#" class="nav-link" onclick="switchTab('settings')">Configurações & Privacidade</a>
+            </nav>
+
+            <!-- CARD DE UPGRADE / PLANO -->
+            <div class="sidebar-footer">
+                <div class="plan-card">
+                    <div class="plan-info">
+                        <strong>Plano Gratuito</strong>
+                        <span>88% dos créditos usados</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress" style="width: 88%;"></div></div>
+                    <button class="btn-upgrade" onclick="switchTab('plans')">Upgrade Pro ($12/mo)</button>
+                </div>
+                <div class="user-profile" onclick="switchTab('account')">
+                    <div class="avatar" id="userAvatar">AM</div>
+                    <div class="user-meta">
+                        <strong id="userName">Alex Morgan</strong>
+                        <span id="userStatus">Conectado (Local)</span>
+                    </div>
+                </div>
+            </div>
         </aside>
         
+        <!-- MAIN AREA -->
         <main class="main-area">
             <header class="topbar">
-                <span>Personal Workspace</span>
-                <div class="avatar">AM</div>
+                <span id="topbarTitle">Personal Workspace</span>
+                <div class="topbar-right">
+                    <button class="btn-secondary" onclick="toggleAuth()" id="authBtn">Sair / Entrar</button>
+                    <div class="avatar-small" onclick="switchTab('account')">AM</div>
+                </div>
             </header>
             
+            <!-- TAB: WORKSPACE -->
             <div id="workspace" class="content-tab">
-                <h1>Make room for <span style="color:#78c7ff">what’s next.</span></h1>
-                <p class="subtle">O seu ambiente moderno de criação e código.</p>
-                <button class="btn-primary" onclick="switchTab('editor')">Começar a Codar</button>
+                <div class="hero-section">
+                    <div class="hero-text">
+                        <h1>Make room for <span style="color:#78c7ff">what’s next.</span></h1>
+                        <p class="subtle">Um ambiente moderno para criar, codar e conectar suas ideias no navegador.</p>
+                        <div class="hero-actions">
+                            <button class="btn-primary" onclick="createNewProject()">+ Criar Projeto</button>
+                            <button class="btn-secondary" onclick="switchTab('projects')">Meus Projetos</button>
+                        </div>
+                    </div>
+                    <div class="hero-code-preview">
+                        <div class="code-header">
+                            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                            <span class="file-name">starter.ts</span>
+                        </div>
+                        <pre><code>type Project = {
+  name: string;
+  language: string;
+};
+
+function createWorkspace(p: Project) {
+  return { ...p, ready: true };
+}</code></pre>
+                    </div>
+                </div>
             </div>
 
+            <!-- TAB: PROJECTS -->
             <div id="projects" class="content-tab" style="display:none;">
-                <h2>Projetos</h2>
-                <p class="subtle">Gerencie seus códigos locais.</p>
+                <h2>Meus Projetos Salvos</h2>
+                <p class="subtle">Gerencie seus códigos salvos localmente ou na sua conta.</p>
+                <div class="projects-grid" id="projectsGrid"></div>
             </div>
 
+            <!-- TAB: ASSISTANT -->
             <div id="assistant" class="content-tab" style="display:none;">
-                <h2>Assistente IA</h2>
-                <p class="subtle">Pronto para ajudar nas suas ideias.</p>
+                <h2>Assistente de IA</h2>
+                <p class="subtle">Tire dúvidas de código ou gere estruturas instantaneamente.</p>
+                <div class="chat-box">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">Olá! Como posso ajudar a acelerar seus códigos hoje?</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Digite sua dúvida para a IA...">
+                        <button class="btn-primary" onclick="sendAiMessage()">Enviar</button>
+                    </div>
+                </div>
             </div>
 
+            <!-- TAB: PLANS -->
+            <div id="plans" class="content-tab" style="display:none;">
+                <h2>Escolha seu Plano</h2>
+                <p class="subtle">Desbloqueie recursos ilimitados, IA avançada e armazenamento em nuvem.</p>
+                <div class="plans-grid">
+                    <div class="plan-box">
+                        <h3>Gratuito</h3>
+                        <p class="price">$0 <span>/ mês</span></p>
+                        <ul>
+                            <li>✓ Projetos Locais</li>
+                            <li>✓ Recursos básicos</li>
+                            <li>✗ IA Ilimitada</li>
+                        </ul>
+                        <button class="btn-secondary" style="width:100%; margin-top:20px;">Plano Atual</button>
+                    </div>
+                    <div class="plan-box featured">
+                        <div class="badge-pro">POPULAR</div>
+                        <h3>Xpendyz Pro</h3>
+                        <p class="price">$12 <span>/ mês</span></p>
+                        <ul>
+                            <li>✓ Projetos na Nuvem Ilimitados</li>
+                            <li>✓ IA Avançada sem filas</li>
+                            <li>✓ Domínio personalizado</li>
+                        </ul>
+                        <button class="btn-primary" style="width:100%; margin-top:20px;" onclick="simulateUpgrade()">Fazer Upgrade Pro</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: ACCOUNT -->
+            <div id="account" class="content-tab" style="display:none;">
+                <h2>Minha Conta</h2>
+                <p class="subtle">Gerencie seus dados e credenciais de acesso.</p>
+                <div class="settings-card">
+                    <div class="form-group">
+                        <label>Nome de Usuário</label>
+                        <input type="text" id="inputName" value="Alex Morgan">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="inputEmail" value="alex@xpendyz.dev">
+                    </div>
+                    <button class="btn-primary" onclick="saveAccount()">Salvar Alterações</button>
+                </div>
+            </div>
+
+            <!-- TAB: EDITOR -->
             <div id="editor" class="content-tab" style="display:none;">
                 <h2>Editor de Código</h2>
-                <textarea id="codeEditor" rows="10" style="width:100%; background:#050a12; color:#fff; padding:15px; border-radius:8px; border:1px solid #333;" placeholder="Escreva seu código aqui..."></textarea>
+                <p class="subtle">Escreva, teste e salve seus códigos direto no navegador.</p>
+                <div class="editor-container">
+                    <input type="text" id="projectTitleInput" placeholder="Nome do Projeto..." class="project-title-input">
+                    <textarea id="codeEditor" rows="12" placeholder="// Escreva seu código aqui..."></textarea>
+                    <button class="btn-primary" onclick="saveProjectToStorage()">Salvar Projeto</button>
+                </div>
+            </div>
+
+            <!-- TAB: SETTINGS -->
+            <div id="settings" class="content-tab" style="display:none;">
+                <h2>Configurações e Privacidade</h2>
+                <p class="subtle">Controle suas preferências de privacidade e dados.</p>
+                <div class="settings-card">
+                    <div class="setting-item">
+                        <div>
+                            <strong>Modo Escuro Avançado</strong>
+                            <p class="subtle" style="margin:0; font-size:12px;">Manter cores otimizadas para ambientes escuros.</p>
+                        </div>
+                        <input type="checkbox" checked>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Salvar Histórico Local</strong>
+                            <p class="subtle" style="margin:0; font-size:12px;">Armazenar códigos no navegador (localStorage).</p>
+                        </div>
+                        <input type="checkbox" checked id="saveLocalToggle">
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <strong>Limpar Dados Salvos</strong>
+                            <p class="subtle" style="margin:0; font-size:12px;">Apaga todos os projetos salvos no navegador.</p>
+                        </div>
+                        <button class="btn-secondary" onclick="clearLocalStorage()" style="background:#ff4d4d; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">Limpar</button>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
